@@ -1,14 +1,57 @@
-meme_dict = {
-            "CRINGE": "Sesuatu yang sangat aneh atau memalukan",
-            "LOL": "Tanggapan umum terhadap sesuatu yang lucu",
-            "SIGMA": "Keren",
-            "GYATT": "Mengungkapkan kegembiraan, keterkejutan, atau kekaguman yang kuat"
-            }
+# import discord
+# from passgen import gen_pass
 
-word = input("Ketik kata yang tidak Kamu mengerti (gunakan huruf kapital semua!): ")
+# # Variabel intents menyimpan hak istimewa bot
+# intents = discord.Intents.default()
+# # Mengaktifkan hak istimewa message-reading
+# intents.message_content = True
+# # Membuat bot di variabel klien dan mentransfernya hak istimewa
+# client = discord.Client(intents=intents)
 
-if word in meme_dict.keys():
-    print(meme_dict[word])
-else:
-    # Apa yang harus kita lakukan jika kata itu tidak ditemukan?
-    print("Tidak Ditemukan")
+# @client.event
+# async def on_ready():
+#     print(f'Kita telah masuk sebagai {client.user}')
+
+# @client.event
+# async def on_message(message):
+#     if message.author == client.user:
+#         return
+#     if message.content.startswith('$halo'):
+#         await message.channel.send("Hi!")
+#     elif message.content.startswith('$bye'):
+#         await message.channel.send("\\U0001f642")
+#     else:
+#         await message.channel.send(message.content)
+
+#        # gen_pass(10)
+       
+# client.run("token")
+
+import discord
+from discord.ext import commands
+intents = discord.Intents.default()
+intents.message_content = True
+bot = commands.Bot(command_prefix='$', intents=intents)
+@bot.event
+async def on_ready():
+    print(f'We have logged in as {bot.user}')
+@bot.command()
+async def hello(ctx):
+    await ctx.send(f'Hi! I am a bot {bot.user}!')
+@bot.command()
+async def heh(ctx, count_heh = 5):
+    await ctx.send("he" * count_heh)
+
+@bot.command()
+async def guess(ctx):
+    await ctx.send("Guess a number between 1 and 10")
+
+@bot.command()
+async def answer(ctx, n):
+    if n == random.randint(1, 10):
+        await ctx.send("Oh my days, you're so sigma")
+    else:
+        await ctx.send("Nuh uh")
+
+bot.run("token")
+
